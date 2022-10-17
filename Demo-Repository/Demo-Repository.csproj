@@ -2,12 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Demo_Repository</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Demo.Repository\Demo.Repository.csproj" />
+    <ProjectReference Include="..\Demo-Database\Demo-Database.csproj" />
+    <ProjectReference Include="..\Demo-Entity\Demo-Entity.csproj" />
   </ItemGroup>
 
 </Project>
