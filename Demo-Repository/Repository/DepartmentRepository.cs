@@ -1,14 +1,7 @@
 ﻿using Demo.Database;
 using Demo.Database.Models;
-using Demo.Entities;
-using Demo.Entities.ResponseModel;
 using Demo.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Demo.Repository.Repository
 {
@@ -22,10 +15,22 @@ namespace Demo.Repository.Repository
         }
         public async Task<bool> CreateDepartment(Department department)
         {
-          var addDepartment =   await _dBContext.Departments.AddAsync(department);
-            return addDepartment != null;
+            var addDepartment = await _dBContext.Departments.AddAsync(department);
+            await _dBContext.SaveChangesAsync();
+            return true;
         }
-       
+
+        public async Task<bool> DeleteDepartment(int id)
+        {
+            var deletedepartment = await _dBContext.Departments.FirstOrDefaultAsync(x=>x.DepartmentId == id);
+            if(deletedepartment != null)
+            {
+                _dBContext.Remove(deletedepartment);
+            }
+            await _dBContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<List<Department>> GetAllDepartments()
         {
             var result = await _dBContext.Departments.ToListAsync();
@@ -37,6 +42,18 @@ namespace Demo.Repository.Repository
             var theDepartment = await _dBContext.Departments.FindAsync(id);
             return theDepartment;
 
+        }
+        public async Task<bool> UpdateDepartment(Department department)
+        {
+            var departmentList = await _dBContext.Departments.FirstOrDefaultAsync(x => x.DepartmentId == department.DepartmentId);
+            if (departmentList != null)
+            {
+                departmentList.Department_Name = department.Department_Name;
+                _dBContext.Update(departmentList);
+                await _dBContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
     }
 }

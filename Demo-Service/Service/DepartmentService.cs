@@ -26,7 +26,26 @@ namespace Demo.Service.Service
             {
                 var thedepartment = await _departmentRepository.CreateDepartment(department);
                 responseModel.IsSuccess = true;
-                responseModel.Message = "Data Retrived Successfully";
+                responseModel.Message = "Data Added Successfully";
+
+                return responseModel;
+            }
+            catch (Exception e)
+            {
+                responseModel.Message = "Something went wrong";
+                responseModel.IsSuccess = false;
+                return responseModel;
+            }
+        }
+
+        public async Task<ResponseModel<bool>> DeleteDepartment(int id)
+        {
+            ResponseModel<bool> responseModel = new ResponseModel<bool> { IsSuccess = false };
+            try
+            {
+                var thedepartments = await _departmentRepository.DeleteDepartment(id);
+                responseModel.IsSuccess = true;
+                responseModel.Message = "Data Removed Successfully";
 
                 return responseModel;
             }
@@ -46,7 +65,7 @@ namespace Demo.Service.Service
                 var thedepartments = await _departmentRepository.GetAllDepartments();
                 responseModel.Data = thedepartments.ToList();
                 responseModel.IsSuccess = true;
-                responseModel.Message = "Data Retrived Successfully";
+                responseModel.Message = "All Data Retrived Successfully";
 
                 return responseModel;
             }
@@ -67,6 +86,30 @@ namespace Demo.Service.Service
                 responseModel.Data = thedepartment;
                 responseModel.IsSuccess = true;
                 responseModel.Message = "Data Retrived Successfully";
+
+                return responseModel;
+            }
+            catch (Exception e)
+            {
+                responseModel.Message = "Something went wrong";
+                responseModel.IsSuccess = false;
+                return responseModel;
+            }
+        }
+
+        public async Task<ResponseModel<Department>> UpdateDepartment(Department department)
+        {
+            ResponseModel<Department> responseModel = new ResponseModel<Department> { IsSuccess = false };
+            try
+            {
+                var thedepartment = await _departmentRepository.UpdateDepartment(department);
+                responseModel.Data = new Department
+                {
+                    DepartmentId = department.DepartmentId,
+                    Department_Name = department.Department_Name
+                };
+                responseModel.IsSuccess = true;
+                responseModel.Message = "Data Updated Successfully";
 
                 return responseModel;
             }

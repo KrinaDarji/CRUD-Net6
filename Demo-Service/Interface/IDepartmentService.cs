@@ -14,6 +14,8 @@ namespace Demo.Service.Interface
         public Task<ResponseModel<List<Department>>> GetAllDepartments();
         public Task<ResponseModel<Department>> GetDepartment(int id);
         public Task<ResponseModel<Department>> CreateDepartment(Department department);
+        public Task<ResponseModel<Department>> UpdateDepartment(Department department);
+        public Task<ResponseModel<bool>> DeleteDepartment(int id);
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Demo.Service.Interface;
+﻿using Demo.Database.Models;
+using Demo.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRUD_Net6.Controllers
@@ -34,5 +35,39 @@ namespace CRUD_Net6.Controllers
             }
             return Ok(result);
         }
+        [HttpPost]
+        [Route("CreateDepartment")]
+        public async Task<IActionResult> CreateDepartment(Department department)
+        {
+            var result = await _departmentService.CreateDepartment(department);
+            if (!result.IsSuccess)
+            {
+                return StatusCode(500, result);
+            }
+            return Ok(result);
+        }
+        [HttpPost]
+        [Route("UpdateDepartment")]
+        public async Task<IActionResult> UpdateDepartment(Department department)
+        {
+            var result = await _departmentService.UpdateDepartment(department);
+            if (!result.IsSuccess)
+            {
+                return StatusCode(500, result);
+            }
+            return Ok(result);
+        }
+        [HttpPost]
+        [Route("DeleteDepartment")]
+        public async Task<IActionResult> DeleteDepartment(int id)
+        {
+            var result = await _departmentService.DeleteDepartment(id);
+            if (!result.IsSuccess)
+            {
+                return StatusCode(500, result);
+            }
+            return Ok(result);
+        }
+
     }
 }

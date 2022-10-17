@@ -8,7 +8,8 @@ namespace Demo.Repository.Interface
     {
         public Task<List<Department>> GetAllDepartments();
         public Task<Department> GetDepartment(int id);
-        public Task<bool> CreateDepartment(Department requestModel);
-
+        public Task<bool> CreateDepartment(Department department);
+        public Task<bool> UpdateDepartment(Department department);
+        public Task<bool> DeleteDepartment(int id);
     }
 }
