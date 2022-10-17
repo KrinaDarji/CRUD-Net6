@@ -14,9 +14,20 @@ namespace CRUD_Net6.Controllers
         }
         [HttpGet]
         [Route("GetDepartment")]
-        public async Task<IActionResult> GetClient(int id)
+        public async Task<IActionResult> GetDepartment(int id)
         {
             var result = await _departmentService.GetDepartment(id);
+            if (!result.IsSuccess)
+            {
+                return StatusCode(500, result);
+            }
+            return Ok(result);
+        }
+        [HttpGet]
+        [Route("GetAllDepartments")]
+        public async Task<IActionResult> GetAllDepartment()
+        {
+            var result = await _departmentService.GetAllDepartments();
             if (!result.IsSuccess)
             {
                 return StatusCode(500, result);

@@ -3,6 +3,7 @@ using Demo.Database.Models;
 using Demo.Entities;
 using Demo.Entities.ResponseModel;
 using Demo.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,11 @@ namespace Demo.Repository.Repository
           var addDepartment =   await _dBContext.Departments.AddAsync(department);
             return addDepartment != null;
         }
-
+       
         public async Task<List<Department>> GetAllDepartments()
         {
-            throw new NotImplementedException();
+            var result = await _dBContext.Departments.ToListAsync();
+            return result;
         }
 
         public async Task<Department> GetDepartment(int id)

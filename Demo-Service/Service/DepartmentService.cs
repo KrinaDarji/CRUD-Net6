@@ -38,9 +38,24 @@ namespace Demo.Service.Service
             }
         }
 
-        public Task<ResponseModel<List<Department>>> GetAllDepartments()
+        public async Task<ResponseModel<List<Department>>> GetAllDepartments()
         {
-            throw new NotImplementedException();
+            ResponseModel<List<Department>> responseModel = new ResponseModel<List<Department>> { IsSuccess = false };
+            try
+            {
+                var thedepartments = await _departmentRepository.GetAllDepartments();
+                responseModel.Data = thedepartments.ToList();
+                responseModel.IsSuccess = true;
+                responseModel.Message = "Data Retrived Successfully";
+
+                return responseModel;
+            }
+            catch (Exception e)
+            {
+                responseModel.Message = "Something went wrong";
+                responseModel.IsSuccess = false;
+                return responseModel;
+            }
         }
 
         public async Task<ResponseModel<Department>> GetDepartment(int id)
