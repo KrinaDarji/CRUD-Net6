@@ -3,6 +3,12 @@ using Demo.Repository.Interface;
 using Demo.Repository.Repository;
 using Demo.Service.Interface;
 using Demo.Service.Service;
+using Demo_Repository.Dapper_Repository.Interface;
+using Demo_Repository.Dapper_Repository.Repository;
+using Demo_Repository.Interface;
+using Demo_Repository.Repository;
+using Demo_Service.Interface;
+using Demo_Service.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +24,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddTransient<IDepartmentService, DepartmentService>();
+builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+builder.Services.AddTransient<IDbRepo, DbRepo>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
