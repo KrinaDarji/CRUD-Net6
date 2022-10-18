@@ -65,7 +65,7 @@ namespace Demo.Service.Service
                 var thedepartments = await _departmentRepository.GetAllDepartments();
                 responseModel.Data = thedepartments.ToList();
                 responseModel.IsSuccess = true;
-                responseModel.Message = "All Data Retrived Successfully";
+                responseModel.Message = "All Data Retrieved Successfully";
 
                 return responseModel;
             }
