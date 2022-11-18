@@ -1,4 +1,5 @@
 ﻿using Demo.Database.Models;
+using Demo_Entity.RequestModel;
 using Demo_Repository.Dapper_Repository.Interface;
 using Demo_Repository.Interface;
 using System;
@@ -18,7 +19,7 @@ namespace Demo_Repository.Repository
             _dbRepo = dbRepo;
         }
 
-        public async Task<bool> CreateEmployee(Employee employee)
+        public async Task<bool> CreateEmployee(EmployeeRequestModel employee)
         {
             var result =
                 await _dbRepo.EditData(
@@ -38,13 +39,13 @@ namespace Demo_Repository.Repository
             return employeeList;
         }
 
-        public async Task<Employee> UpdateEmployee(Employee employee)
+        public async Task<bool> UpdateEmployee(EmployeeRequestModel employee)
         {
             var updateEmployee =
                 await _dbRepo.EditData(
                     "Update Employees SET FirstName=@FirstName, LastName=@LastName, EmailAddress=@EmailAddress,Phone=@Phone,Address=@Address,DepartmentId=@DepartmentId  WHERE id=@Id",
                     employee);
-            return employee;
+            return true;
         }
     }
 }

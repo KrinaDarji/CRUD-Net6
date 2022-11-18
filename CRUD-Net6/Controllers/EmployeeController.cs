@@ -1,4 +1,5 @@
 ﻿using Demo.Database.Models;
+using Demo_Entity.RequestModel;
 using Demo_Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -30,7 +31,7 @@ namespace CRUD_Net6.Controllers
         }
         [HttpPost]
         [Route("CreateEmployees")]
-        public async Task<IActionResult> CreateEmployee(Employee employee)
+        public async Task<IActionResult> CreateEmployee(EmployeeRequestModel employee)
         {
             var result = await _employeeService.CreateEmployee(employee);
             if (!result.IsSuccess)
@@ -52,7 +53,7 @@ namespace CRUD_Net6.Controllers
         }
         [HttpPost]
         [Route("UpdateEmployee")]
-        public async Task<IActionResult> UpdateDepartment(Employee employee)
+        public async Task<IActionResult> UpdateDepartment(EmployeeRequestModel employee)
         {
             var result = await _employeeService.UpdateEmployee(employee);
             if (!result.IsSuccess)

@@ -1,4 +1,5 @@
 ﻿using Demo.Database.Models;
+using Demo_Entity.RequestModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Demo_Repository.Interface
 {
     public interface IEmployeeRepository
     {
-        Task<bool> CreateEmployee(Employee employee);
+        Task<bool> CreateEmployee(EmployeeRequestModel employee);
         Task<List<Employee>> GetEmployeeList();
-        Task<Employee> UpdateEmployee(Employee employee);
+        Task<bool> UpdateEmployee(EmployeeRequestModel employee);
         Task<bool> DeleteEmployee(int key);
     }
 }

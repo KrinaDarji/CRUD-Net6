@@ -1,5 +1,6 @@
 ﻿using Demo.Database.Models;
 using Demo.Entities.ResponseModel;
+using Demo_Entity.RequestModel;
 using Demo_Repository.Interface;
 using Demo_Service.Interface;
 using System;
@@ -19,7 +20,7 @@ namespace Demo_Service.Service
         {
             _employeeRepository = employeeRepository;
         }
-        public async Task<ResponseModel<bool>> CreateEmployee(Employee employee)
+        public async Task<ResponseModel<bool>> CreateEmployee(EmployeeRequestModel employee)
         {
             ResponseModel<bool> responseModel = new ResponseModel<bool> { IsSuccess = false };
             try
@@ -77,21 +78,13 @@ namespace Demo_Service.Service
             }
         }
 
-        public async Task<ResponseModel<Employee>> UpdateEmployee(Employee employee)
+        public async Task<ResponseModel<bool>> UpdateEmployee(EmployeeRequestModel employee)
         {
-            ResponseModel<Employee> responseModel = new ResponseModel<Employee> { IsSuccess = false };
+            ResponseModel<bool> responseModel = new ResponseModel<bool> { IsSuccess = false };
             try
             {
                 var thedepartment = await _employeeRepository.UpdateEmployee(employee);
-                responseModel.Data = new Employee
-                {
-                    FirstName = employee.FirstName, 
-                    LastName = employee.LastName,
-                    Phone= employee.Phone,
-                    Address = employee.Address,
-                    EmailAddress = employee.EmailAddress,
-                    DepartmentId = employee.DepartmentId
-                };
+                
                 responseModel.IsSuccess = true;
                 responseModel.Message = "Data Updated Successfully";
 

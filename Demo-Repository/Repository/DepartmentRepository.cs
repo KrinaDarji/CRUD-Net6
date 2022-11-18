@@ -1,5 +1,6 @@
 ﻿using Demo.Database;
 using Demo.Database.Models;
+using Demo.Entities;
 using Demo.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +14,13 @@ namespace Demo.Repository.Repository
         {
             _dBContext = dBContext;
         }
-        public async Task<bool> CreateDepartment(Department department)
+        public async Task<bool> CreateDepartment(DepartmentRequestModel department)
         {
-            var addDepartment = await _dBContext.Departments.AddAsync(department);
+            Department departMent = new Department()
+            {
+                Department_Name = department.Department_Name
+            };
+            var addDepartment = await _dBContext.Departments.AddAsync(departMent);
             await _dBContext.SaveChangesAsync();
             return true;
         }
@@ -43,7 +48,7 @@ namespace Demo.Repository.Repository
             return theDepartment;
 
         }
-        public async Task<bool> UpdateDepartment(Department department)
+        public async Task<bool> UpdateDepartment(DepartmentRequestModel department)
         {
             var departmentList = await _dBContext.Departments.FirstOrDefaultAsync(x => x.DepartmentId == department.DepartmentId);
             if (departmentList != null)

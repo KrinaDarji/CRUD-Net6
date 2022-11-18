@@ -19,7 +19,7 @@ namespace Demo.Service.Service
         {
             _departmentRepository = departmentRepository;
         }
-        public async Task<ResponseModel<Department>> CreateDepartment(Department department)
+        public async Task<ResponseModel<Department>> CreateDepartment(DepartmentRequestModel department)
         {
             ResponseModel<Department> responseModel = new ResponseModel<Department> { IsSuccess = false };
             try
@@ -97,7 +97,7 @@ namespace Demo.Service.Service
             }
         }
 
-        public async Task<ResponseModel<Department>> UpdateDepartment(Department department)
+        public async Task<ResponseModel<Department>> UpdateDepartment(DepartmentRequestModel department)
         {
             ResponseModel<Department> responseModel = new ResponseModel<Department> { IsSuccess = false };
             try

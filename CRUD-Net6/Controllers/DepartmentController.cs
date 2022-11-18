@@ -1,4 +1,5 @@
 ﻿using Demo.Database.Models;
+using Demo.Entities;
 using Demo.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +40,7 @@ namespace CRUD_Net6.Controllers
         }
         [HttpPost]
         [Route("CreateDepartment")]
-        public async Task<IActionResult> CreateDepartment(Department department)
+        public async Task<IActionResult> CreateDepartment(DepartmentRequestModel department)
         {
             var result = await _departmentService.CreateDepartment(department);
             if (!result.IsSuccess)
@@ -50,7 +51,7 @@ namespace CRUD_Net6.Controllers
         }
         [HttpPost]
         [Route("UpdateDepartment")]
-        public async Task<IActionResult> UpdateDepartment(Department department)
+        public async Task<IActionResult> UpdateDepartment(DepartmentRequestModel department)
         {
             var result = await _departmentService.UpdateDepartment(department);
             if (!result.IsSuccess)
